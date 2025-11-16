@@ -95,19 +95,54 @@ WSL2 (Windows compatibility)
 
 psycopg (database driver)
 
+🌐 Service Endpoints
+| Service                              | URL                                                      |
+| ------------------------------------ | -------------------------------------------------------- |
+| **FastAPI Docs (Swagger)**           | [http://localhost:8000/docs](http://localhost:8000/docs) |
+| **InsightHub Dashboard (Streamlit)** | [http://localhost:8501](http://localhost:8501)           |
+| **PostgreSQL**                       | localhost:5432                                           |
+
+
+
+
+📡 API Examples
+➤ Ingest a metric
+
+POST /metrics
+
+{
+  "source": "server-1",
+  "cpu": 86.5,
+  "memory": 67.2,
+  "latency": 102,
+  "errors": 0.8
+}
+
+➤ Get latest metric
+
+GET /metrics/latest
+
+➤ Get series
+
+GET /metrics/series?minutes=30&source=server-1
+
+
 
 
 
 📂 Project Structure
-.
+
+cloud-monitoring-insighthub/
+│
 ├── services/
-│   ├── api/           # FastAPI backend
-│   ├── dashboard/     # Streamlit app
-│   └── generator/     # Metrics generator
-├── sql/
-│   └── init.sql       # DB schema
-├── .env.example       # Environment template
+│   ├── api/          # FastAPI backend
+│   ├── dashboard/    # Streamlit UI
+│   └── generator/    # Metric generator
+│
+├── sql/              # Database init scripts
 ├── docker-compose.yml
+├── Makefile
+├── .env.example
 └── README.md
 
 
